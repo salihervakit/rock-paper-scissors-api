@@ -4,6 +4,10 @@ const PORT = 3001
 
 app.use(express.static('public'))
 
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/index.html')
+})
+
 app.get('/api/', (req, res) => {
   const choice = req.query.choice
   const result = rockPaperScissors(choice)
@@ -13,10 +17,10 @@ app.get('/api/', (req, res) => {
   res.end(JSON.stringify(objToJson))
 })
 
-
-app.listen(process.env.PORT || PORT, _ => {
-  console.log(`The server is running on port ${PORT}`)
+app.listen(process.env.PORT || PORT, () => {
+  console.log(`Server running on port ${PORT}`)
 })
+
 
 function rockPaperScissors(choice) {
   choice = +choice
